@@ -116,6 +116,7 @@ public class ConverterCore {
                                 sb.append(curLayerGroup.name.toLowerCase());
                         }
                         sb.append(".png");
+                        System.out.println("Exporting\""+sb.toString()+"\" for: "+curLayerGroup.name);
                         writeImage(sb.toString(), curLayerGroup.img);
                     }
 //                    System.out.println(photoshopLayers.get(i).toString());
@@ -182,8 +183,9 @@ public class ConverterCore {
             this.y = top;
             this.h = bottom-top;
             this.w = right-left;
-            if(Settings.REPLACE_LAYER_NAME_SPACES_TO_DASHES)
-                this.name = name.replace(" ", "_");
+            if(Settings.REPLACE_LAYER_NAME_SPACES_TO_DASHES) {
+                this.name = name.replace(" ", "_").trim();
+            }
         }
 
         @Override
@@ -267,7 +269,7 @@ public class ConverterCore {
 
             currentPath.append(node.getNodeName());
 
-            if(currentPath.equals("path")) {
+            if(currentPath.toString().equals(path)) {
                 if (node.hasAttributes()) {
                     var ats = node.getAttributes();
                     for (int j = 0; j < ats.getLength(); j++) {
@@ -321,7 +323,7 @@ public class ConverterCore {
 
     public static void writeImage(String fileName, RenderedImage image) throws IOException {
         String format = "png";
-        File file = new File(fileName);
+        File file = new File(".\\"+fileName);
 
         // Get the writer
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(format);
@@ -333,6 +335,7 @@ public class ConverterCore {
         ImageWriter writer = writers.next();
 
         try {
+            System.out.println(file.getPath());
             // Create output stream (in try-with-resource block to avoid leaks)
             try (ImageOutputStream output = ImageIO.createImageOutputStream(file)) {
                 writer.setOutput(output);

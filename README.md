@@ -3,6 +3,9 @@ Simple utility for automating variations of objects with or without the backgrou
 
 ![Photoshop example](https://i.imgur.com/ZnG3dGU.png)
 
+# Supported Software
+Krita and Photoshop can both export the layers the same way. I've tested the workflow with both of them and I'm happy to say they are both working. If you find some weird software that can export to PSD let me know!
+
 # Usage
 Make sure you have JDK or JRE installed.
 

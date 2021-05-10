@@ -1,0 +1,56 @@
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "7.0.0"
+}
+
+mainClassName = 'psdutil.ApplicationCore'
+apply plugin: "com.github.johnrengelman.shadow"
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    // https://github.com/haraldk/TwelveMonkeys#adobe-photoshop-document-psd
+    implementation 'com.twelvemonkeys:twelvemonkeys:3.7.0'
+
+    // https://mvnrepository.com/artifact/com.twelvemonkeys.imageio/imageio-core
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio', version: '3.7.0', ext: 'pom'
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: '3.7.0'
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: '3.7.0'
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio-psd', version: '3.7.0'
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio-clippath', version: '3.7.0'
+
+    implementation 'com.twelvemonkeys.common:common:3.7.0'
+    implementation 'com.twelvemonkeys.common:common-image:3.7.0'
+    implementation 'com.twelvemonkeys.common:common-io:3.7.0'
+    implementation 'com.twelvemonkeys.common:common-lang:3.7.0'
+
+
+}
+application {
+    // Desired way mainClass.set("<main class>") causes an issue during jar packaging
+            mainClassName ="psdutil.ApplicationCore"
+}

@@ -1,0 +1,1 @@
+@java -jar build/libs/PhotoshopResourceUtil-1.0-SNAPSHOT-all.jar
